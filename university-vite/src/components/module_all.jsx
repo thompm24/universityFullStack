@@ -24,10 +24,11 @@ function AllModules() {
   )
   
   return (
-    <ul>{cohorts.map((item, index) =>
-          <li key={index}>
-            <h3>{item.full_name}</h3>
-              <p>ID: {item.code} Year: {item.year}</p>
+    <ul className="flex flex-wrap">{cohorts.map((item, index) =>
+          <li className="mb-4 w-1/2 md:w-1/3 lg:w-1/4" key={index}>
+           <div className="bg-white m-4 shadow-md rounded-md p-4 h-48">
+            <h2 className="text-xl font-bold mb-2">{item.full_name}</h2>
+              <p>ID: {item.code} Year: {item.code[2]}</p>
               <p>Delivered to:</p>
               <ul>{item.delivered_to.map((e, i) =>
                 <li key={i}>
@@ -35,6 +36,7 @@ function AllModules() {
                 </li>
               )}</ul>
               <br/>
+            </div>
           </li>
           )}
       </ul>

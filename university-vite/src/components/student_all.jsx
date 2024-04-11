@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function AllStudents() {
   const [students, setStudents] = useState([]);
@@ -15,12 +15,20 @@ function AllStudents() {
   )
  
   const displayStudents = () => {
-    return students.map(elem=>
-    <li key={elem.student_id}>combus1
-      <h1>{elem.first_name} {elem.last_name}</h1>
+
+    return students.map(elem=> {
+      const gradeUrl = `/grade_set/${elem.student_id}`;
+      return (
+    <li className="mb-4 w-1/2 md:2-1/3 lg:w-1/4" key={elem.student_id}>
+      <div className="bg-white m-4 shadow-md rpunded-md p-4 h-48">
+      <h1 className="text-xl">{elem.first_name} {elem.last_name}</h1>
       <p>{elem.email}</p>
+      <Link to={gradeUrl}>Set Grades</Link>
+      </div>
     </li>
-    )
+      )}
+      )
+    
       
   }
  
@@ -30,14 +38,17 @@ function AllStudents() {
 
   return (
     <div>
+
+
+    <div className="m-10 p-10 bg-white">
+      <h1 className="m-4 text-xl">View All Students</h1>
       <form onSubmit={search}>
         <label htmlFor="studentNo">Student Number:</label>
-        <input id="studentNo" name="studentNo" type="text" maxLength="8" />
-        <input type="submit" />
+        <input id="studentNo" className="border-b-2 border-slate-900" name="studentNo" type="text" maxLength="8" />
+        <input type="submit" className="bg-slate-900 rounded-md padding-2 text-white"/>
       </form>
-
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <ul>{displayStudents()}</ul>
+    </div>
+      <ul className="flex flex-wrap">{displayStudents()}</ul>
     </div>
   )
 }
