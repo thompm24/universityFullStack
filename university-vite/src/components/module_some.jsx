@@ -5,7 +5,6 @@ import { useParams, Link } from 'react-router-dom';
 function SomeModules() {
   let {moduleCode} = useParams();
   const [module, setModule] = useState(null);
-  const url = `http://127.0.0.1:8000/api/module/${moduleCode}/`;
 
   function lastArg(e) {
     return e.split("/").filter(Boolean).pop();
@@ -31,8 +30,8 @@ function SomeModules() {
     return(<h1>Loading...</h1>)
   }
   return (
-    <div>
-      <h1>{module.full_name}</h1>
+    <div className="bg-white m-4 p-4">
+      <h1 className="text-2xl font-bold">{module.full_name}</h1>
       <p>ID: {module.code} Year: {module.year}</p>
       <h2>Delivered to:</h2>
       <ul>

@@ -13,9 +13,10 @@ function SomeStudents() {
     .then(response=>response.json())
     .then(data=>{
           setStudent(
-          <li>
-            <h2>{data.first_name} {data.last_name}</h2>
+          <li className="bg-white m-10 p-10">
+            <h2 className="text-xl">{data.first_name} {data.last_name}</h2>
             <p>{data.email}</p>
+            <p>{data.student_id}</p>
             <Link to={gradeUrl}>Submit Grade</Link>
           </li>
           )
@@ -29,7 +30,6 @@ function SomeStudents() {
   }
  return (
     <div>
-      <h1 className="text-3xl font-bold underline">Degree:</h1>
       <ul>{student}</ul>
     </div>
   )

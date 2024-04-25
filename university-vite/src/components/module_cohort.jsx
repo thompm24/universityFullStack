@@ -13,7 +13,7 @@ function CohortModules() {
     .then(data => {
       setModules(data.map( (item) =>
         (
-        <li key={item.code}>
+        <li className="bg-white p-4 m-4 w-1/5" key={item.code}>
           <h1>{item.full_name}</h1>
           <ul>
             {item.delivered_to.map( (url) =>
@@ -39,8 +39,8 @@ function CohortModules() {
   }
   return (
     <div>
-      <h1>Modules taken by {cohortCode}</h1>
-      <ul>
+      <h1 className='text-3xl font-bold m-2 underline'>Modules taken by {cohortCode}</h1>
+      <ul className='flex flex-wrap justify-around'>
         {modules}
       </ul>
     </div>

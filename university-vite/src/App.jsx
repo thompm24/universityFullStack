@@ -14,6 +14,7 @@ import SomeModules from './components/module_some';
 import CreateModules from './components/module_create';
 import CohortModules from './components/module_cohort';
 import SetGrades from './components/grade_set';
+import HomePage from './components/HomePage';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
@@ -21,10 +22,11 @@ function App() {
 
   return (
     <Router>
-      <div className="App bg-slate-200">
+      <div className="App bg-slate-200 min-h-screen">
         <Nav />
         <div className="content">
           <Routes>
+            <Route path="" element={<HomePage />} />
             <Route path="/degrees" element={<AllDegrees/>} />
             <Route path="/degrees/:degreeName" element={<SomeDegrees/>} />
             <Route path="/degrees/create" element={<CreateDegree/>}/>

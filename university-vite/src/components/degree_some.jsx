@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 function SomeDegrees() {
   let {degreeName} = useParams();
@@ -21,22 +21,25 @@ function SomeDegrees() {
     fetch(`http://127.0.0.1:8000/api/cohort/?degree=${degreeName}`)
     .then(response=>response.json())
     .then(data=>{
-        setCohorts(data.map((item) =>
-          <li key={item.id}>
-            <h2>{item.name}</h2>
+        setCohorts(data.map((item) => {
+          const cohortUrl = `/cohorts/${item.id}`;
+          return (
+          <li key={item.id} className="bg-white m-4 p-4 md:w-1/4 lg:w-1/4 m-l-auto m-r-auto">
+            <h2 className="text-1xl font-bold">{item.name}</h2>
             <p>{item.id}</p>
+            <Link to={cohortUrl}>Read More</Link>
           </li>
+        )}
             ))
       }
     )
     }, []
   )
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Degree:</h1>
-      <ul>{degree}</ul>
+    <div className="bg-white m-4 p-4">
+      <h1 className="text-3xl font-bold">{degree}</h1>
       <h3>Cohorts Containing Degree</h3>
-      <ul>{cohorts}</ul>
+      <ul className="flex flex-wrap justify-between">{cohorts}</ul>
     </div>
   )
 }

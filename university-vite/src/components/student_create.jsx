@@ -1,7 +1,9 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function CreateStudent() {
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch("http://127.0.0.1:8000/api/student/", {
@@ -24,6 +26,7 @@ function CreateStudent() {
       .catch((err) => {
         console.log(err);
       });
+     navigate(`/students/${e.target.student_id.value}`);
   };
 
   const [cohorts, setCohorts] = useState([]);
@@ -37,16 +40,16 @@ function CreateStudent() {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
+    <form onSubmit={handleSubmit} className="bg-white m-20 p-20">
       <label htmlFor="student_id">Student ID</label>
-      <input id="student_id" name="student_id" type="text" maxLength="8"/>
+      <input id="student_id" className="border-b-2 border-black" name="student_id" type="text" maxLength="8"/><br/>
       <label htmlFor="first_name">First Name</label>
-      <input id="first_name" name="first_name" type="text" />
+      <input id="first_name" name="first_name" className="border-b-2 border-black" type="text" /><br/>
       <label htmlFor="last_name">Last Name</label>
-      <input id="last_name" name="last_name" type="text" />
+      <input id="last_name" name="last_name" className="border-b-2 border-black" type="text" /><br/>
       <label htmlFor="email">E-Mail</label>
-      <input id="email" name="email" type="text" />
-      <input type="submit" value="submit" />
+      <input id="email" className='border-b-2 border-black' name="email" type="text" /><br/>
       <select
         name="cohort"
         value={selectedCohort}
@@ -58,8 +61,10 @@ function CreateStudent() {
           {cohort.name}
         </option>
         ))}
-      </select>
+      </select><br/>
+    <input type="submit" className="bg-slate-900 rounded-md text-white p-1" value="Submit" />
     </form>
+    </div>
   );
 }
 

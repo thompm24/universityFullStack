@@ -1,7 +1,10 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function CreateDegree() {
+  const navigate =useNavigate();
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch("http://127.0.0.1:8000/api/degree/", {
@@ -21,16 +24,19 @@ function CreateDegree() {
       .catch((err) => {
         console.log(err);
       });
+    navigate(`/degrees/${e.target.shortcode.value}`);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="flex justify-center">
+    <form className="bg-white p-10 m-10" onSubmit={handleSubmit}>
       <label htmlFor="shortcode">Shortcode</label>
-      <input id="shortcode" name="shortcode" type="text"/>
+      <input id="shortcode" name="shortcode" className="border-b-2 border-black" type="text"/><br/>
       <label htmlFor="full_name">Full Name</label>
-      <input id="full_name" name="full_name" type="text" />
-      <input type="submit" />
+      <input id="full_name" className='border-b-2 border-black' name="full_name" type="text" /><br/><br/>
+      <input type="submit" className='bg-slate-900 text-white rounded-md'/>
     </form>
+    </div>
   );
 }
 

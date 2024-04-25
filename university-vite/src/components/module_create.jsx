@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function CreateModule() {
-
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch("http://127.0.0.1:8000/api/module/",
@@ -24,6 +25,7 @@ function CreateModule() {
     .catch((err) => {
       console.log(err);
     })
+    navigate(`/modules/${e.target.code.value}`);
   }
 
   const [cohorts, setCohorts] = useState([]);
@@ -55,17 +57,23 @@ function CreateModule() {
     return(<h1>Loading.....</h1>)
   }
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="flex bg-white m-5 p-10 justify-around item-center" onSubmit={handleSubmit}>
+      <div className='flex flex-col justify-center align-items'>
+    <h1 className="text-2xl">Create New Module:</h1>
       <label htmlFor="full_name">Full Name</label>
-      <input id="full_name" name="full_name" type="text" />
+      <input id="full_name" className='border-b-2 border-black' name="full_name" type="text" /><br/>
       <label htmlFor="code">Code</label>
-      <input id="code" name="code" type="text" maxLength="8" />
+      <input id="code" className='border-b-2 border-black' name="code" type="text" maxLength="8" /><br/>
       <label htmlFor="ca_split">CA Split</label>
-      <input id="ca_split" name="ca_split" type="int" />
+      <input id="ca_split"  className='border-b-2 border-black' name="ca_split" type="int" /><br/>
+       <input type="submit" className='bg-slate-900 text-white font-bold p-1 rounded-md m-2' value="Create"/>
+    </div>
+    <div className='flex flex-col justify-end'>
       {cohorts.map((cohort) =>
-        <label key={cohort.id}>{cohort.name}
+        <label className="text-right" key={cohort.id}>{cohort.name}
           <input
             type="checkbox"
+            className='text-right'
             value={`http://127.0.0.1:8000/api/cohort/${cohort.id}/`}
             onChange={handleCheckbox}
             checked={selectedCohorts.includes(`http://127.0.0.1:8000/api/cohort/${cohort.id}/`)}
@@ -73,7 +81,7 @@ function CreateModule() {
           <br/>
         </label>
        )}
-       <input type="submit"/>
+    </div>
     </form>
   )
 }
